@@ -1,0 +1,19 @@
+# Credentials / config
+.env
+*.env
+config.ini
+secrets.json
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+
+# OS/editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Large or sensitive raw data (uncomment if needed)
+# raw_data/
+# *.csv
