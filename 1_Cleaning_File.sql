@@ -6,7 +6,7 @@ FROM layoffs;
 -- 1. Remove Duplicates
 -- 2. Standardize the Data
 -- 3. Null or Blank Values
--- 4. Remove Any Unecessary Columns
+-- 4. Remove Useless Entries
 
 # Create a copy of the data to keep an unaltered copy
 CREATE TABLE layoffs_staging
@@ -184,7 +184,35 @@ SET t1.industry = t2.industry
 WHERE(t1.industry IS NULL or t1.industry = '')
 AND t2.industry IS NOT NULL;
 
+#It worked. One company is left with a null industry, Bally's Interactive. let's look at it
+SELECT *
+FROM layoffs_staging_2
+WHERE company = "Bally's Interactive";
+# This one doesn't have another row with the industry filled in
+
+SELECT *
+FROM layoffs_staging_2;
 
 
 
+-- Remove Useless Entries
+# Check where values of interest are null (total laid off AND  %age laid off both null)
+SELECT *
+FROM layoffs_staging_2
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
+
+# And delete them
+DELETE 
+FROM layoffs_staging_2
+WHERE total_laid_off IS NULL
+AND percentage_laid_off IS NULL;
+
+# Remove row_num column
+ALTER TABLE layoffs_staging_2
+DROP COLUMN row_num; 
+
+# Last check on the table
+SELECT *
+FROM layoffs_staging_2;
 
