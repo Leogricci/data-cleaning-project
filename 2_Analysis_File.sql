@@ -110,3 +110,14 @@ ORDER BY years;
 
 
 ## And other variables
+
+
+
+-- Now let's create a copy of layoffs_staging_2 and give it a clean name for export
+CREATE TABLE layoffs_clean AS
+SELECT *
+FROM layoffs_staging_2;
+
+# And export it
+SELECT *
+FROM layoffs_clean;
