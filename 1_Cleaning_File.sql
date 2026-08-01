@@ -142,6 +142,39 @@ SELECT *
 FROM layoffs_staging_2;
 
 
+## Change total_laid_off to int
+# make sure null is a value not a str
+UPDATE layoffs_staging_2
+SET total_laid_off = NULL
+WHERE total_laid_off = 'NULL';
+
+# Make values int
+ALTER TABLE layoffs_staging_2
+MODIFY COLUMN total_laid_off INT;
+
+
+## Change percentage_laid_off to decimal
+# make sure null is a value not a str
+UPDATE layoffs_staging_2
+SET percentage_laid_off = NULL
+WHERE percentage_laid_off = 'NULL';
+
+# Make values int
+ALTER TABLE layoffs_staging_2
+MODIFY COLUMN percentage_laid_off DECIMAL(3, 2); # Max 3 numbers, 2 after the decimal point
+
+
+## Change funds_raised_millions to int
+# make sure null is a value not a str
+UPDATE layoffs_staging_2
+SET funds_raised_millions = NULL
+WHERE funds_raised_millions = 'NULL';
+
+# Make values int
+ALTER TABLE layoffs_staging_2
+MODIFY COLUMN funds_raised_millions INT;
+
+
 -- Null and blank Values
 
 # Check where values of interest are null
